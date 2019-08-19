@@ -1,25 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import ServiceList from "./components/ServiceList";
+import Grid from "@material-ui/core/Grid";
+import EndpointList from "./components/EndpointList";
+import HistoryList from "./components/HistoryList";
+
+const styles = {
+    App: {
+    }
+};
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App" style={styles.App}>
+          <Grid container justify="center" spacing={1}>
+              <Grid item xs={3}>
+                  <ServiceList />
+              </Grid>
+              <Grid item xs={3}>
+                  <EndpointList />
+              </Grid>
+              <Grid item xs={5}>
+                  <HistoryList />
+              </Grid>
+          </Grid>
+      </div>
   );
 }
 
