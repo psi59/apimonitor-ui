@@ -4,13 +4,11 @@ import IconButton from "@material-ui/core/IconButton";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import List from "@material-ui/core/List";
 
 class EndpointListItem extends React.Component {
-    constructor(props) {
-        super(props);
-        console.log(props)
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     render() {
         return (

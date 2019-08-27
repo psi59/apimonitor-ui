@@ -12,11 +12,7 @@ function generate(element) {
 }
 
 class HistoryList extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
+     render() {
         return (
             <List>
                 {generate(
