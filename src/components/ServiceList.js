@@ -5,6 +5,8 @@ import List from "@material-ui/core/List";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import ServiceListItem from "./ServiceListItem";
 import axios from "axios";
+import {getApiUrl} from "../helpers/API";
+import {boxShadow, listHeaderBgColor} from "../helpers/color";
 
 class ServiceList extends React.Component {
     constructor(props) {
@@ -21,18 +23,18 @@ class ServiceList extends React.Component {
     }
 
     setListItem = () => {
-        axios.get('http://localhost:1323/v1/webservices', {
+        axios.get(getApiUrl(`v1/webservices`), {
             withCredentials: true,
         }).then((res) => {
             const data = res.data.result;
             console.log(data);
             this.setState({
                 listItems: data.items.map((v) =>
-                    <ServiceListItem id={v.id} host={v.host} desc={v.desc} refreshList={this.setListItem}/>
+                    <ServiceListItem data={v} refreshList={this.setListItem}/>
                 )
             });
-        }).catch((res) => {
-            console.log(res)
+        }).catch((e) => {
+            console.log(e)
         });
     };
 
@@ -42,7 +44,16 @@ class ServiceList extends React.Component {
                 component="nav"
                 aria-labelledby="nested-list-subheader"
                 subheader={
-                    <ListSubheader component="div" id="nested-list-subheader">
+                    <ListSubheader
+                        component="div"
+                        id="nested-list-subheader"
+                        disableSticky={true}
+                        inset={true}
+                        style={{
+                            'background': listHeaderBgColor,
+                            'boxShadow': boxShadow,
+                        }}
+                    >
                         Web Services
                         <IconButton edge="end" aria-label="more">
                             <AddCircleRoundedIcon />
