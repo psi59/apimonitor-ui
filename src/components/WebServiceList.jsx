@@ -1,14 +1,14 @@
 import * as React from "react";
 import IconButton from "@material-ui/core/IconButton";
-import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
 import List from "@material-ui/core/List";
 import ListSubheader from "@material-ui/core/ListSubheader";
-import ServiceListItem from "./ServiceListItem";
+import WebServiceListItem from "./WebServiceListItem";
 import axios from "axios";
 import {getApiUrl} from "../helpers/API";
 import {boxShadow, listHeaderBgColor} from "../helpers/color";
+import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
 
-class ServiceList extends React.Component {
+class WebServiceList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -30,7 +30,7 @@ class ServiceList extends React.Component {
             console.log(data);
             this.setState({
                 listItems: data.items.map((v) =>
-                    <ServiceListItem data={v} refreshList={this.setListItem}/>
+                    <WebServiceListItem data={v} refreshList={this.setListItem}/>
                 )
             });
         }).catch((e) => {
@@ -67,4 +67,4 @@ class ServiceList extends React.Component {
     }
 }
 
-export default ServiceList
+export default WebServiceList

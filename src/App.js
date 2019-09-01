@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import ServiceList from "./components/ServiceList";
+import WebServiceList from "./components/WebServiceList";
 import Grid from "@material-ui/core/Grid";
 import EndpointList from "./components/EndpointList";
 import HistoryList from "./components/HistoryList";
@@ -16,7 +16,7 @@ function App() {
       <div className="App" style={styles.App}>
           <Grid container justify="center" spacing={1}>
               <Grid item xs={3}>
-                  <ServiceList />
+                  <WebServiceList />
               </Grid>
               <Grid item xs={3}>
                   <EndpointList />
