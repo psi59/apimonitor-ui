@@ -26,6 +26,30 @@ class WebServiceEditor extends React.Component {
         })
     };
 
+    addWebservice = () => {
+        const requestData = {
+            'host': this.state.host,
+            'desc': this.state.desc,
+            'favicon': 'https://realsangil.github.io/assets/images/blog/bio-photo.png'
+        };
+
+        const refesh = this.props.refreshList;
+        const hideEditor = this.hideEditor;
+
+        axios.post(
+            getApiUrl(`v1/webservices`),
+            requestData,
+        ).then(
+            function (res) {
+                console.log(res);
+                hideEditor();
+                refesh();
+            }
+        ).catch(function (e) {
+            console.log(e);
+        });
+    };
+
     updateWebservice = () => {
         const requestData = {
             'host': this.state.host,
@@ -50,8 +74,11 @@ class WebServiceEditor extends React.Component {
         });
     };
 
+    confirm = this.props.isAddWebService ? this.addWebservice : this.updateWebservice;
+
     hideEditor = () => {
       this.props.toggleIsEdit();
+      this.props.refreshList();
     };
 
     render() {
@@ -104,7 +131,7 @@ class WebServiceEditor extends React.Component {
                         variant="contained"
                         color="primary"
                         size='small'
-                        onClick={this.updateWebservice}
+                        onClick={this.confirm}
                     >
                         Confirm
                     </Button>

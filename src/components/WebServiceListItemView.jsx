@@ -33,19 +33,21 @@ class WebServiceListItemView extends React.Component{
     editService = (event) => {
         this.toggleMenu(event);
         this.props.toggleIsEdit();
+        this.props.refreshList();
     };
 
 
     deleteService = (event) => {
         this.toggleMenu(event);
+        const refresh = this.props.refreshList;
         axios.delete(
             getApiUrl(`v1/webservices/${this.props.data.id}`)
         ).then(function (res) {
             console.log(res);
+            refresh();
         }).catch(function (e) {
             console.log(e);
         });
-        this.props.refreshList();
     };
 
     render() {

@@ -7,16 +7,13 @@ import axios from "axios";
 import {getApiUrl} from "../helpers/API";
 import {boxShadow, listHeaderBgColor} from "../helpers/color";
 import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
+import WebServiceEditor from "./WebServiceEditor";
 
 class WebServiceList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'listItems': [],
-        };
-
-        this.state = {
-            listItem: [],
+            listItems: [],
         };
 
         this.setListItem();
@@ -30,12 +27,36 @@ class WebServiceList extends React.Component {
             console.log(data);
             this.setState({
                 listItems: data.items.map((v) =>
-                    <WebServiceListItem data={v} refreshList={this.setListItem}/>
+                    <WebServiceListItem
+                        data={v}
+                        refreshList={this.setListItem}
+                    />
                 )
             });
         }).catch((e) => {
             console.log(e)
         });
+    };
+
+    addWebService = (e) => {
+        e.preventDefault();
+        console.log(this.state.listItems);
+        this.setState({
+            listItems: [<WebServiceEditor
+                isAddWebService={true}
+                toggleIsEdit={() => {
+                    this.setState({
+                        listItems: [...this.state.listItems.slice(1)],
+                    })
+                }}
+                refreshList={this.setListItem}
+                data={{
+                    id: 0,
+                    host: '',
+                    desc: '',
+                }}
+            />, ...this.state.listItems],
+        })
     };
 
     render() {
@@ -55,7 +76,11 @@ class WebServiceList extends React.Component {
                         }}
                     >
                         Web Services
-                        <IconButton edge="end" aria-label="more">
+                        <IconButton
+                            edge="end"
+                            aria-label="more"
+                            onClick={this.addWebService}
+                        >
                             <AddCircleRoundedIcon />
                         </IconButton>
                     </ListSubheader>
