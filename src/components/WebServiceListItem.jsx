@@ -27,7 +27,11 @@ class WebServiceListItem extends React.Component {
 
     render() {
         return (
-            <ListItem id={this.props.data.id}>
+            <ListItem
+                id={this.props.data.id}
+                button={true}
+                selected={this.props.index==0}
+            >
                 {this.state.isEdit ? <WebServiceEditor
                     data={this.props.data}
                     toggleIsEdit={this.toggleIsEdit}

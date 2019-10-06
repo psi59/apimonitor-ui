@@ -14,6 +14,7 @@ class WebServiceList extends React.Component {
         super(props);
         this.state = {
             listItems: [],
+            // selectedWebService: null,
         };
 
         this.setListItem();
@@ -26,12 +27,14 @@ class WebServiceList extends React.Component {
             const data = res.data.result;
             console.log(data);
             this.setState({
-                listItems: data.items.map((v) =>
+                listItems: data.items.map((v, i) =>
                     <WebServiceListItem
                         data={v}
+                        index={i}
                         refreshList={this.setListItem}
                     />
-                )
+                ),
+                // selectedWebService: data.items.length > 0 ? data.items[0] : null
             });
         }).catch((e) => {
             console.log(e)
