@@ -24,7 +24,7 @@ export default function EndpointListItem(props) {
     return <ListItem
         divider={true}
         button={true}
-        selected={props.index==0}
+        selected={ props.index === 0 }
     >
         <EndpointDialog
             open={dialogOpen}

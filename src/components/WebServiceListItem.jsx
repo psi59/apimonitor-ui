@@ -1,14 +1,12 @@
 import * as React from "react";
-import ListItem from "@material-ui/core/ListItem";import axios from "axios";
-import {getApiUrl} from "../helpers/API";
+import ListItem from "@material-ui/core/ListItem";
 import WebServiceListItemView from "./WebServiceListItemView";
 import WebServiceEditor from "./WebServiceEditor";
+import {Link} from "react-router-dom";
+import {inject, observer} from "mobx-react";
 
-const menuItems = [
-    'Edit',
-    'Delete'
-];
-
+@inject('store')
+@observer
 class WebServiceListItem extends React.Component {
     constructor(props) {
         super(props);
@@ -30,16 +28,17 @@ class WebServiceListItem extends React.Component {
             <ListItem
                 id={this.props.data.id}
                 button={true}
-                selected={this.props.index==0}
+                component={Link}
+                to={`/services/${this.props.data.id}`}
             >
                 {this.state.isEdit ? <WebServiceEditor
                     data={this.props.data}
                     toggleIsEdit={this.toggleIsEdit}
-                    refreshList={this.props.refreshList}
+                    refreshList={ this.props.refreshList }
                 /> : <WebServiceListItemView
                     data={this.props.data}
                     toggleIsEdit={this.toggleIsEdit}
-                    refreshList={this.props.refreshList}
+                    refreshList={ this.props.refreshList }
                 />}
             </ListItem>
         )

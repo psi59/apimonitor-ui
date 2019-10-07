@@ -1,14 +1,26 @@
-import { observable, action } from 'mobx';
+import {observable, action, computed} from 'mobx';
 
 export default class DefaultStore {
-    @observable selectedWebService = null;
-    @observable selectedEndpoint = null;
+    @observable selected = {
+        WebService: null,
+        Endpoint: null,
+    };
 
     @action setSelectedWebService = (webService) => {
-        this.selectedWebService = webService
+        this.selected.WebService = webService
     };
 
     @action setSelectedEndpoint = (endpoint) => {
-        this.selectedEndpoint = endpoint
+        this.selected.Endpoint = endpoint
+    };
+
+    @action getSelectedEndpoint = () => {
+        console.log(this.selected.Endpoint);
+        return this.selected.Endpoint;
+    };
+
+    @computed get selectedWebService() {
+        console.log(this.selected.WebService);
+        return this.selected.WebService
     };
 };

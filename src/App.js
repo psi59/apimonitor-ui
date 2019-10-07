@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
+import WebService from "./pages/WebService";
+import {Redirect, Route} from "react-router-dom";
+import Endpoint from "./pages/Endpoint";
 import WebServiceList from "./components/WebServiceList";
-import Grid from "@material-ui/core/Grid";
-import EndpointList from "./components/EndpointList";
-import HistoryList from "./components/HistoryList";
 import DefaultStore from "./helpers/store";
 
 const styles = {
@@ -13,21 +13,34 @@ const styles = {
 
 const store = new DefaultStore();
 
-
 function App() {
   return (
       <div className="App" style={styles.App}>
-          <Grid container justify="center" spacing={1}>
-              <Grid item xs={3}>
-                  <WebServiceList store={store} />
-              </Grid>
-              <Grid item xs={3}>
-                  <EndpointList  store={store} />
-              </Grid>
-              <Grid item xs={5}>
-                  <HistoryList   store={store} />
-              </Grid>
-          </Grid>
+          <Redirect to="/services"/>
+          <Route
+              exact
+              path="/services"
+              render={(props) => (
+                  <WebService {...props} store={store}/>
+              )}
+          />
+          <Route
+              exact
+              path="/services/:id"
+              component={Endpoint}
+          />
+          {/*<Grid container justify="center" spacing={1}>*/}
+          {/*    <Grid item xs={3}>*/}
+          {/*        <WebServiceList/>*/}
+          {/*    </Grid>*/}
+          {/*    <Grid item xs={3}>*/}
+          {/*        <EndpointList />*/}
+          {/*    </Grid>*/}
+          {/*    <Grid item xs={5}>*/}
+          {/*        <HistoryList />*/}
+          {/*    </Grid>*/}
+          {/*</Grid>*/}
+          {/*<DevTools />*/}
       </div>
   );
 }

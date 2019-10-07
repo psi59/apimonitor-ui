@@ -8,15 +8,16 @@ import {getApiUrl} from "../helpers/API";
 import {boxShadow, listHeaderBgColor} from "../helpers/color";
 import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
 import WebServiceEditor from "./WebServiceEditor";
+import {inject, observer} from "mobx-react";
 
+@inject('store')
+@observer
 class WebServiceList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             listItems: [],
-            // selectedWebService: null,
         };
-
         this.setListItem();
     }
 
@@ -27,14 +28,13 @@ class WebServiceList extends React.Component {
             const data = res.data.result;
             console.log(data);
             this.setState({
-                listItems: data.items.map((v, i) =>
-                    <WebServiceListItem
+                listItems: data.items.map((v, i) => {
+                    return <WebServiceListItem
                         data={v}
                         index={i}
                         refreshList={this.setListItem}
                     />
-                ),
-                // selectedWebService: data.items.length > 0 ? data.items[0] : null
+                }),
             });
         }).catch((e) => {
             console.log(e)
