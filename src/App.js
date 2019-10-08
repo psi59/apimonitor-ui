@@ -1,46 +1,59 @@
 import React from 'react';
 import './App.css';
 import WebService from "./pages/WebService";
-import {Redirect, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import Endpoint from "./pages/Endpoint";
-import WebServiceList from "./components/WebServiceList";
 import DefaultStore from "./helpers/store";
+import {Container, createMuiTheme} from "@material-ui/core";
+import { ThemeProvider } from '@material-ui/styles';
+import {blue} from "@material-ui/core/colors";
+import CreateWebService from "./pages/CreateWebService";
+
 
 const styles = {
     App: {
     }
 };
 
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+          main: blue[500],
+        },
+        secondary: {
+            main: blue[500],
+        },
+    },
+});
+
 const store = new DefaultStore();
 
 function App() {
   return (
       <div className="App" style={styles.App}>
-          <Redirect to="/services"/>
-          <Route
-              exact
-              path="/services"
-              render={(props) => (
-                  <WebService {...props} store={store}/>
-              )}
-          />
-          <Route
-              exact
-              path="/services/:id"
-              component={Endpoint}
-          />
-          {/*<Grid container justify="center" spacing={1}>*/}
-          {/*    <Grid item xs={3}>*/}
-          {/*        <WebServiceList/>*/}
-          {/*    </Grid>*/}
-          {/*    <Grid item xs={3}>*/}
-          {/*        <EndpointList />*/}
-          {/*    </Grid>*/}
-          {/*    <Grid item xs={5}>*/}
-          {/*        <HistoryList />*/}
-          {/*    </Grid>*/}
-          {/*</Grid>*/}
-          {/*<DevTools />*/}
+          <ThemeProvider theme={theme}>
+              <Container
+                  maxWidth="md"
+              >
+                  <Route
+                      exact
+                      path="/services"
+                      render={(props) => (
+                          <WebService {...props} store={store}/>
+                      )}
+                  />
+                  <Route
+                      exact
+                      path="/services/:id"
+                      component={Endpoint}
+                  />
+                  <Route
+                    exact
+                    path="/services/new"
+                    component={CreateWebService}
+                  />
+              </Container>
+          </ThemeProvider>
       </div>
   );
 }

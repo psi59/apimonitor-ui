@@ -1,12 +1,8 @@
 import * as React from "react";
-import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
-import ListSubheader from "@material-ui/core/ListSubheader";
 import WebServiceListItem from "./WebServiceListItem";
 import axios from "axios";
 import {getApiUrl} from "../helpers/API";
-import {boxShadow, listHeaderBgColor} from "../helpers/color";
-import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
 import WebServiceEditor from "./WebServiceEditor";
 import {inject, observer} from "mobx-react";
 
@@ -67,27 +63,6 @@ class WebServiceList extends React.Component {
             <List
                 component="nav"
                 aria-labelledby="nested-list-subheader"
-                subheader={
-                    <ListSubheader
-                        component="div"
-                        id="nested-list-subheader"
-                        disableSticky={true}
-                        inset={true}
-                        style={{
-                            'background': listHeaderBgColor,
-                            'boxShadow': boxShadow,
-                        }}
-                    >
-                        Web Services
-                        <IconButton
-                            edge="end"
-                            aria-label="more"
-                            onClick={this.addWebService}
-                        >
-                            <AddCircleRoundedIcon />
-                        </IconButton>
-                    </ListSubheader>
-                }
             >
                 {this.state.listItems}
             </List>

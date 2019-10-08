@@ -5,7 +5,7 @@ import axios from "axios";
 import {getApiUrl} from "../helpers/API";
 import {inject, observer} from "mobx-react";
 
-const webServiceIdRegExp = new RegExp(`\/services\/(\\w+)`)
+const webServiceIdRegExp = new RegExp(`\/services\/(\\w+)`);
 
 @inject('store')
 @observer
